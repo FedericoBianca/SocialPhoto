@@ -125,84 +125,82 @@ public class Utilities {
             @Override
             public void onCompleted(GraphResponse response) {
 
-                try {
-                    JSONObject obj = response.getJSONObject();
-                    JSONArray data = obj.getJSONArray("data");
-                    if (!location.equals("") && date.equals("Select Date")) {
-                        for (int i = 0; i < data.length(); i++) {
-                            JSONObject currentElement = data.getJSONObject(i);
-                            if (currentElement.has("place")) {
-                                if (currentElement.getJSONObject("place").has("location")) {
-                                    if (currentElement.getJSONObject("place").getJSONObject("location").has("city")) {
-                                        String place = currentElement.getJSONObject("place").getJSONObject("location").getString("city");
-                                        if (place.equals(location)) {
-                                            JSONArray image = currentElement.getJSONArray("images");
-                                            JSONObject firstSource = image.getJSONObject(0);
-                                            String source = firstSource.getString("source");
-                                            array.add(source);
-                                        }
+                if (!response.toString().equals("")) {
+                    try {
+                        JSONObject obj = response.getJSONObject();
+                        JSONArray data = obj.getJSONArray("data");
+                        if (!location.equals("") && date.equals("Select Date")) {
+                            for (int i = 0; i < data.length(); i++) {
+                                JSONObject currentElement = data.getJSONObject(i);
+                                if (currentElement.has("place")) {
+                                    if (currentElement.getJSONObject("place").has("location")) {
+                                        if (currentElement.getJSONObject("place").getJSONObject("location").has("city")) {
+                                            String place = currentElement.getJSONObject("place").getJSONObject("location").getString("city");
+                                            if (place.equals(location)) {
+                                                JSONArray image = currentElement.getJSONArray("images");
+                                                JSONObject firstSource = image.getJSONObject(0);
+                                                String source = firstSource.getString("source");
+                                                array.add(source);
+                                            }
 
+                                        }
                                     }
                                 }
                             }
-                        }
-                    } else if (location.equals("") && !date.equals("Select Date")) {
-                        for (int i = 0; i < data.length(); i++) {
-                            JSONObject currentElement = data.getJSONObject(i);
-                            String created = currentElement.getString("created_time");
-                            if (created.contains(date)) {
+                        } else if (location.equals("") && !date.equals("Select Date")) {
+                            for (int i = 0; i < data.length(); i++) {
+                                JSONObject currentElement = data.getJSONObject(i);
+                                String created = currentElement.getString("created_time");
+                                if (created.contains(date)) {
+                                    JSONArray image = currentElement.getJSONArray("images");
+                                    JSONObject firstSource = image.getJSONObject(0);
+                                    String source = firstSource.getString("source");
+                                    array.add(source);
+                                }
+
+                            }
+                        } else if (location.equals("") && date.equals("Select Date")) {
+                            for (int i = 0; i < data.length(); i++) {
+                                JSONObject currentElement = data.getJSONObject(i);
                                 JSONArray image = currentElement.getJSONArray("images");
                                 JSONObject firstSource = image.getJSONObject(0);
                                 String source = firstSource.getString("source");
                                 array.add(source);
                             }
+                        } else {
 
-                        }
-                    }
+                            for (int i = 0; i < data.length(); i++) {
+                                JSONObject currentElement = data.getJSONObject(i);
+                                if (currentElement.has("place")) {
+                                    if (currentElement.getJSONObject("place").has("location")) {
+                                        if (currentElement.getJSONObject("place").getJSONObject("location").has("city")) {
+                                            String place = currentElement.getJSONObject("place").getJSONObject("location").getString("city");
+                                            String created = currentElement.getString("created_time");
+                                            if (place.equals(location) && created.contains(date)) {
+                                                JSONArray image = currentElement.getJSONArray("images");
+                                                JSONObject firstSource = image.getJSONObject(0);
+                                                String source = firstSource.getString("source");
+                                                array.add(source);
+                                            }
 
-                    else if(location.equals("") && date.equals("Select Date")){
-                        for (int i = 0; i < data.length(); i++){
-                            JSONObject currentElement = data.getJSONObject(i);
-                            JSONArray image = currentElement.getJSONArray("images");
-                            JSONObject firstSource = image.getJSONObject(0);
-                            String source = firstSource.getString("source");
-                            array.add(source);
-                        }
-                    }
-
-                    else {
-
-                        for (int i = 0; i < data.length(); i++) {
-                            JSONObject currentElement = data.getJSONObject(i);
-                            if (currentElement.has("place")) {
-                                if (currentElement.getJSONObject("place").has("location")) {
-                                    if (currentElement.getJSONObject("place").getJSONObject("location").has("city")) {
-                                        String place = currentElement.getJSONObject("place").getJSONObject("location").getString("city");
-                                        String created = currentElement.getString("created_time");
-                                        if (place.equals(location) && created.contains(date)) {
-                                            JSONArray image = currentElement.getJSONArray("images");
-                                            JSONObject firstSource = image.getJSONObject(0);
-                                            String source = firstSource.getString("source");
-                                            array.add(source);
                                         }
-
                                     }
                                 }
                             }
+
                         }
 
+                        GraphRequest nextRequest = response.getRequestForPagedResults(GraphResponse.PagingDirection.NEXT);
+                        if (nextRequest != null) {
+                            nextRequest.setCallback(this);
+                            nextRequest.executeAndWait();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
 
-                    GraphRequest nextRequest = response.getRequestForPagedResults(GraphResponse.PagingDirection.NEXT);
-                    if (nextRequest != null) {
-                        nextRequest.setCallback(this);
-                        nextRequest.executeAndWait();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-
             }
         };
 
