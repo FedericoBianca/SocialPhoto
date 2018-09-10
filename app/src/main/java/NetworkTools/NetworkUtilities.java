@@ -18,7 +18,14 @@ public class NetworkUtilities {
 
     public static String sendToken(String facebookToken) {
         //Build up your query URI
-        Uri builtURI = Uri.parse("http://192.168.1.219:3000/tasks").buildUpon()
+        Uri builtURI = Uri.parse("http://192.168.1.219:3000/users").buildUpon()
+                .appendQueryParameter(FACEBOOK_TOKEN, facebookToken)
+                .build();
+
+        return sendRequest(builtURI, "POST");
+    }
+    public static String getDataUser(String facebookToken){
+        Uri builtURI = Uri.parse("http://192.168.1.219:3000/users/myUser").buildUpon()
                 .appendQueryParameter(FACEBOOK_TOKEN, facebookToken)
                 .build();
 
