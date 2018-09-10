@@ -42,7 +42,6 @@ public class TabActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tab);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
