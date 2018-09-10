@@ -43,10 +43,16 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".Profile_Overview" />
+
         <activity android:name=".Login" />
-        <activity android:name=".DisplayPhotos" android:parentActivityName=".Profile_Overview" />
-        <activity android:name=".FullImageActivity" android:parentActivityName=".Profile_Overview"></activity>
+        <activity
+            android:name=".DisplayPhotos" android:parentActivityName=".TabActivity"/>
+        <activity
+            android:name=".FullImageActivity" android:parentActivityName=".TabActivity" />
+        <activity
+            android:name=".TabActivity"
+            android:label="@string/title_activity_tab"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

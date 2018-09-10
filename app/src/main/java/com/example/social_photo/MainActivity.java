@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
+        //FacebookSdk.sdkInitialize(getApplicationContext());
+        //AppEventsLogger.activateApp(this);
 
         //-----------------------------------
         //This part is used to guarantee the retrieval of the data from the network by our device, avoiding network errors
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else{
-            Intent intent = new Intent(this,Profile_Overview.class);
+            Intent intent = new Intent(this,TabActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
