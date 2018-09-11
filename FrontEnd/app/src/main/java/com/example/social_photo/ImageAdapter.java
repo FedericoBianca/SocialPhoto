@@ -8,6 +8,7 @@ import android.view.*;
 import android.content.*;
 
 import com.squareup.picasso.Picasso;
+import NetworkTools.FacebookOperation;
 
 public class ImageAdapter extends BaseAdapter {
 
@@ -17,7 +18,7 @@ public class ImageAdapter extends BaseAdapter {
 
     public ImageAdapter(Context context, String album, String location, String date) {
         this.context = context;
-        Utilities.getFacebookPhoto(album,bitmapList,location,date);
+        FacebookOperation.getFacebookPhoto(album,bitmapList,location,date);
 
     }
 

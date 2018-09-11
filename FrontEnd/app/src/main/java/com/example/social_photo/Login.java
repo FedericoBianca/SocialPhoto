@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import static NetworkTools.NetworkUtilities.sendToken;
-
+import NetworkTools.FacebookOperation;
 public class Login extends AppCompatActivity {
 
     private LoginButton loginButton;
@@ -71,7 +71,7 @@ public class Login extends AppCompatActivity {
                 request.executeAndWait();
 
                 try {
-                    Bitmap propic = Utilities.getFacebookProfilePicture(id);
+                    Bitmap propic = FacebookOperation.getFacebookProfilePicture(id);
                     String propic_converted = Utilities.BitMapToString(propic);
                     SaveSharedPreference.setProfilePicture(Login.this, propic_converted);
                 }

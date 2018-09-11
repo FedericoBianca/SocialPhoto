@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import NetworkTools.FacebookOperation;
 
 public class SearchTab extends Fragment implements View.OnClickListener {
     private TextView textView;
@@ -56,6 +58,7 @@ public class SearchTab extends Fragment implements View.OnClickListener {
 
         submit = rootView.findViewById(R.id.submit);
         submit.setOnClickListener(this);
+
 
         //----------------------------------------------------------------------------------------------
 
@@ -94,34 +97,10 @@ public class SearchTab extends Fragment implements View.OnClickListener {
 
         });
 
-        //----------------------------------------------------------------------------------------------
-
-        AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
-                if(currentAccessToken == null){
-                    SharedPreferences.Editor editor = SaveSharedPreference.getSharedPreferences(getContext()).edit();
-
-                    editor.clear();
-                    editor.apply();
-
-
-                    Intent intent1 = new Intent(getActivity().getBaseContext(), Login.class);
-                    intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent1.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(intent1);
-
-                }
-            }
-        };
-        accessTokenTracker.startTracking();
-
-        //----------------------------------------------------------------------------------------------
 
 
         if(SaveSharedPreference.getUserAlbums(getContext()) == ""){
-            Utilities.getAlbum(getContext());
+            FacebookOperation.getAlbum(getContext());
         }
 
 
