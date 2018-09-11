@@ -19,6 +19,7 @@
     <string name="search">Search</string>
     <string name="overview">Overview</string>
     <string name="FetchPhoto">Fetching Photos...</string>
+    <string name="submit">Submit</string>
 
 
 </resources>

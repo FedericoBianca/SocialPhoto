@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.social_photo.Activities.DisplayPhotos;
+import com.example.social_photo.Activities.Recap;
 import com.example.social_photo.NetworkTools.NetworkUtilities;
 import com.example.social_photo.R;
 import com.example.social_photo.Utils.SaveSharedPreference;
@@ -31,13 +32,7 @@ public class OverviewTab extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.overview_tab, container, false);
-        String[] itemname ={
-                "Most Liked Photo",
-                "Most Commented Photo",
-                "Best Friend",
-                "Best Location"
 
-        };
         dropDown = rootView.findViewById(R.id.dropDown);
         dropDown.setHint("Select Year");
 
@@ -57,10 +52,6 @@ public class OverviewTab extends Fragment implements View.OnClickListener {
         button = rootView.findViewById(R.id.buttonRecap);
         button.setOnClickListener(this);
 
-        /*listView = rootView.findViewById(R.id.listView);
-        listView.setAdapter(new ArrayAdapter<>(
-                getContext(), R.layout.mylist,
-                R.id.textView3,itemname));*/
         return rootView;
 
     }
@@ -101,6 +92,9 @@ public class OverviewTab extends Fragment implements View.OnClickListener {
             String photoId = resultArray[0];
             int photoLikes = Integer.parseInt(resultArray[1]);
             */
+            Intent intent = new Intent(getContext(),Recap.class);
+            startActivity(intent);
+
         }
 
     }
