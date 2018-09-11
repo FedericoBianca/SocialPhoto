@@ -1,13 +1,16 @@
 'use strict';
 const MongoClient = require('mongodb').MongoClient;
-var MongoUrl = "mongodb://localhost:27017/";  //URL per connettermi al database di MongoDB
+const Event = require('events');
+const utils = require('../../utils');
 
-exports.list_all_users = function(req, res){
-  console.log(req.query); //con .query accedo ai dati inviati dal richiedente formattati in formato JSON, per prendere i campi basta fare .query.campo
-  // Per inviare indietro una risposta in formato JSON:
-  var obj = JSON.parse('{"name":"peppino", "age":"302"}');
-  res.json(obj);
-}
+var MongoUrl = "mongodb://localhost:27017/";  //URL per connettermi al database di MongoDB
+var eventEmitter = new Event.EventEmitter();
+
+//Event Handler lanciato al login
+eventEmitter.on('Logged_In', function(token) {
+  console.log("Emit presa!");
+  utils.calculateUserInfos(token);  //Per ogni utente calcolo le info tramite la funzione definita in utils
+});
 
 //HTTP POST di un utente: se non c'è nel DB lo inserisco, altrimenti aggiorno il FB_TOKEN
 exports.create_a_user = function(req, res){
@@ -33,14 +36,13 @@ exports.create_a_user = function(req, res){
         console.log("User succesfully updated!");
       });
     });
-      //db.close();
   });
+  eventEmitter.emit('Logged_In', token);
   res.json();
 }
 
 //HTTP GET del singolo utente, devo rispondere con le info sull'utente quali id foto più piaciuta...
 exports.read_a_user = function(req, res){
-  console.log("Pierino ha richiesto informazioni!");
   var token = req.query.facebook_token;
 
   MongoClient.connect(MongoUrl, { useNewUrlParser: true }, function(err, db) {
@@ -61,9 +63,17 @@ exports.update_a_user = function(req, res){
   res.json(risposta);
 }
 
-/*
-exports.delete_a_user = function(req, res){
-  var risposta = "{\"name\": \"giggino\"}"
-  res.json(risposta);
+exports.setLoggedOut = function(req, res){
+  var token = req.query.facebook_token;
+  var newValues = { $set: {LOGGED_IN: false} };
+
+  MongoClient.connect(MongoUrl, { useNewUrlParser: true }, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("mydb");  //creo l'oggetto  dbo che rappresenta il database "mydb" di MongoDB
+
+    dbo.collection("users").updateOne({FB_TOKEN: token}, newValues, function (err,res) {
+      if(err) throw err;
+      console.log("User succesfully marked ad LoggedOut!");
+    });
+  });
 }
-*/

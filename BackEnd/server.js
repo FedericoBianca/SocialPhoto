@@ -6,8 +6,6 @@ const express = require('express'), //importo il modulo express per gestire i me
 const sleep = require('sleep');
 const utils = require('./utils');
 
-const FB = require('fb');
-
 var routes = require('./api/routes/todoListRoutes'); //importing route
 routes(app); //register the route
 
@@ -27,25 +25,3 @@ MongoClient.connect(MongoUrl, { useNewUrlParser: true }, function(err, db) {
     console.log("Collection created!");
   });
 });
-
-
-/*function forever() {
-  sleep.sleep(1);*/
-
-  MongoClient.connect(MongoUrl, { useNewUrlParser: true }, function(err, db) {
-    if(err) throw err;
-    var dbo = db.db("mydb");  //creo l'oggetto  dbo che rappresenta il database "mydb" di MongoDB
-    dbo.collection("users").find().toArray(function(err,res) { //In res avrò l'array degli utenti connessi
-      var numUtenti = res.length;
-      for(i=0; i<numUtenti; i++){
-        if(res[i].LOGGED_IN){
-          var token = res[i].FB_TOKEN;
-          utils.calculateUserInfos(token);  //Per ogni utente calcolo le info tramite la funzione definita in utils
-        }
-      }
-    });
-  });
-  /*setTimeout(forever,0);
-}
-
-forever();*/
