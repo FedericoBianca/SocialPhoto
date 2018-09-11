@@ -1,22 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.social_photo.Activities.TabActivity" >
+    android:layout_margin="16dp"
+    android:orientation="vertical">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/swiperefresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.james602152002.floatinglabelspinner.FloatingLabelSpinner
+        android:id="@+id/dropDown2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        app:j_fls_colorError="#0000FF"
+        app:j_fls_colorHighlight="#0000FF"
+        app:j_fls_error_anim_duration="8000"
+        app:j_fls_error_horizontal_margin="2dp"
+        app:j_fls_error_textSize="14sp"
+        app:j_fls_error_vertical_margin="2dp"
+        app:j_fls_float_anim_duration="800"
+        app:j_fls_hint="label"
+        app:j_fls_hint_textSize="20sp"
+        app:j_fls_label_horizontal_margin="2dp"
+        app:j_fls_label_textSize="14sp"
+        app:j_fls_label_vertical_margin="4dp"
+        app:j_fls_recursive="true"
+        app:j_fls_textColorHint="@android:color/darker_gray"
+        app:j_fls_thickness="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dropDown" />
 
+    <com.james602152002.floatinglabelspinner.FloatingLabelSpinner
+        android:id="@+id/dropDown"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
+        app:j_fls_colorError="#0000FF"
+        app:j_fls_colorHighlight="#0000FF"
+        app:j_fls_error_anim_duration="8000"
+        app:j_fls_error_horizontal_margin="2dp"
+        app:j_fls_error_textSize="14sp"
+        app:j_fls_error_vertical_margin="2dp"
+        app:j_fls_float_anim_duration="800"
+        app:j_fls_hint="label"
+        app:j_fls_hint_textSize="20sp"
+        app:j_fls_label_horizontal_margin="2dp"
+        app:j_fls_label_textSize="14sp"
+        app:j_fls_label_vertical_margin="4dp"
+        app:j_fls_recursive="true"
+        app:j_fls_textColorHint="@android:color/darker_gray"
+        app:j_fls_thickness="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+    <Button
+        android:id="@+id/buttonRecap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="60dp"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dropDown2" />
 
-
-    </android.support.v4.widget.SwipeRefreshLayout>
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>
