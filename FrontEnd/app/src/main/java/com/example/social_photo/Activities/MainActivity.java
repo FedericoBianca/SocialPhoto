@@ -1,12 +1,11 @@
-package com.example.social_photo;
+package com.example.social_photo.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
+import com.example.social_photo.R;
 
 
 import com.facebook.Profile;

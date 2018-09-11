@@ -1,4 +1,4 @@
-package com.example.social_photo;
+package com.example.social_photo.Utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,7 +20,7 @@ public class SaveSharedPreference
 
 
 
-    static SharedPreferences getSharedPreferences(Context ctx) {
+    public static SharedPreferences getSharedPreferences(Context ctx) {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 

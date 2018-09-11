@@ -1,4 +1,4 @@
-package com.example.social_photo;
+package com.example.social_photo.Activities;
 
 import android.widget.*;
 
@@ -8,7 +8,7 @@ import android.view.*;
 import android.content.*;
 
 import com.squareup.picasso.Picasso;
-import NetworkTools.FacebookOperation;
+import com.example.social_photo.NetworkTools.FacebookOperation;
 
 public class ImageAdapter extends BaseAdapter {
 

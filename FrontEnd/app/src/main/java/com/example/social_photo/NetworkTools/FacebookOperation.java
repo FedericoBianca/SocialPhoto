@@ -1,11 +1,11 @@
-package NetworkTools;
+package com.example.social_photo.NetworkTools;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-import com.example.social_photo.SaveSharedPreference;
+import com.example.social_photo.Utils.SaveSharedPreference;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -18,8 +18,6 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 
 public class FacebookOperation {
     //Method used to retrieve the profile picture of the logged user

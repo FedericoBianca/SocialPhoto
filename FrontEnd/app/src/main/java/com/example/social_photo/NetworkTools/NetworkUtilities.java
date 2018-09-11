@@ -1,4 +1,4 @@
-package NetworkTools;
+package com.example.social_photo.NetworkTools;
 
 import android.net.Uri;
 import android.util.Log;

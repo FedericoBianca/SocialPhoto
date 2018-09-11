@@ -1,4 +1,4 @@
-package com.example.social_photo;
+package com.example.social_photo.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,13 +9,15 @@ import android.os.Bundle;
 
 import android.widget.TextView;
 
+import com.example.social_photo.R;
+import com.example.social_photo.Utils.SaveSharedPreference;
+import com.example.social_photo.Utils.Utilities;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -25,8 +27,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.Arrays;
 
-import static NetworkTools.NetworkUtilities.sendToken;
-import NetworkTools.FacebookOperation;
+import com.example.social_photo.NetworkTools.FacebookOperation;
 public class Login extends AppCompatActivity {
 
     private LoginButton loginButton;
