@@ -3,6 +3,7 @@ package com.example.social_photo.Activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,8 @@ public class DisplayPhotos extends AppCompatActivity {
     protected ImageAdapter adapter;
     protected ProgressBar progressBar;
     protected TextView textView;
+    protected SwipeRefreshLayout swipeRefresh;
+    protected boolean created = true;
     public static final String ID = "com.example.social_photo.ID";
 
     @Override
@@ -32,6 +35,15 @@ public class DisplayPhotos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_photos);
         new DownloadFilesTask().execute();
+        swipeRefresh = findViewById(R.id.swiperefresh);
+        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                new  DownloadFilesTask().execute();
+
+            }
+        });
+
 
     }
     private class DownloadFilesTask extends AsyncTask<Void, Void, ArrayList> {
@@ -39,13 +51,16 @@ public class DisplayPhotos extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            imageGrid = findViewById(R.id.gridview);
-            progressBar = findViewById(R.id.progressBar2);
-            textView = findViewById(R.id.textView2);
-            textView.setText("Fetching Photos...");
-            progressBar.setIndeterminate(true);
-            progressBar.setVisibility(View.VISIBLE);
-            textView.setVisibility(View.VISIBLE);
+            if(created) {
+                imageGrid = findViewById(R.id.gridview);
+                progressBar = findViewById(R.id.progressBar2);
+                textView = findViewById(R.id.textView2);
+                textView.setText("Fetching Photos...");
+                progressBar.setIndeterminate(true);
+                progressBar.setVisibility(View.VISIBLE);
+                textView.setVisibility(View.VISIBLE);
+                created = false;
+            }
 
 
 
@@ -85,6 +100,8 @@ public class DisplayPhotos extends AppCompatActivity {
                 }
             });
             Toast.makeText(DisplayPhotos.this,String.valueOf(arrayList.size())+" photos found!",Toast.LENGTH_SHORT).show();
+
+            swipeRefresh.setRefreshing(false);
         }
     }
 }
