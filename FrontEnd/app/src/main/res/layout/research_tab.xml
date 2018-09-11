@@ -30,7 +30,7 @@
 
 
                 <Spinner
-                    android:id="@+id/spinner2"
+                    android:id="@+id/dropDown2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </android.support.v7.widget.CardView>
@@ -52,7 +52,7 @@
 
 
                 <Spinner
-                    android:id="@+id/spinner"
+                    android:id="@+id/dropDown"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </android.support.v7.widget.CardView>

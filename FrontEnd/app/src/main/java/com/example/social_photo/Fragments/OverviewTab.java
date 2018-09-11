@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.social_photo.Activities.DisplayPhotos;
@@ -26,15 +27,15 @@ import static com.example.social_photo.R.layout.mylist;
 
 public class OverviewTab extends Fragment implements View.OnClickListener {
     private ListView listView;
-    private FloatingLabelSpinner dropDown;
-    private FloatingLabelSpinner dropDown2;
+    private Spinner dropDown;
+    private Spinner dropDown2;
     private Button button;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.overview_tab, container, false);
 
         dropDown = rootView.findViewById(R.id.dropDown);
-        dropDown.setHint("Select Year");
+
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item, Utilities.getYears());
@@ -42,7 +43,7 @@ public class OverviewTab extends Fragment implements View.OnClickListener {
         dropDown.setAdapter(adapter);
 
         dropDown2 = rootView.findViewById(R.id.dropDown2);
-        dropDown2.setHint("Select Month");
+
 
         ArrayAdapter<String> adapter2 = new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_spinner_item, Utilities.getMonth());

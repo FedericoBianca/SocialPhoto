@@ -61,9 +61,6 @@ public class Login extends AppCompatActivity {
                 id = loginResult.getAccessToken().getUserId();
                 SaveSharedPreference.setUserID(Login.this,AccessToken.getCurrentAccessToken().getUserId());
                 SaveSharedPreference.setUserToken(Login.this, AccessToken.getCurrentAccessToken().getToken());
-                String pippo = sendToken(AccessToken.getCurrentAccessToken().getToken(),SaveSharedPreference.getUserID(Login.this));
-                Log.d("TAG", "PIPPO: " + pippo);
-
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 
                     @Override
@@ -85,6 +82,8 @@ public class Login extends AppCompatActivity {
                 catch (IOException e) {
                     e.printStackTrace();
                 }
+                String pippo = sendToken(AccessToken.getCurrentAccessToken().getToken(),SaveSharedPreference.getUserID(Login.this));
+                Log.d("TAG", "PIPPO: " + pippo);
                 Intent intent = new Intent(Login.this, TabActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

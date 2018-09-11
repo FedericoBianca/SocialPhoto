@@ -53,8 +53,9 @@ public class SearchTab extends Fragment implements View.OnClickListener {
         circleImageView = rootView.findViewById(R.id.profile_image);
         circleImageView.setImageBitmap(Utilities.StringToBitMap(SaveSharedPreference.getProfilePicture(getContext())));
 
-        spinner = rootView.findViewById(R.id.spinner);
-        spinner2 = rootView.findViewById(R.id.spinner2);
+        spinner = rootView.findViewById(R.id.dropDown);
+        spinner2 = rootView.findViewById(R.id.dropDown2);
+
 
         submit = rootView.findViewById(R.id.submit);
         submit.setOnClickListener(this);
@@ -121,6 +122,7 @@ public class SearchTab extends Fragment implements View.OnClickListener {
         textView.setText(SaveSharedPreference.getUserName(getContext()));
         circleImageView.setImageBitmap(Utilities.StringToBitMap(SaveSharedPreference.getProfilePicture(getContext())));
         autocompleteFragment.setHint("Search Place...");
+
 
     }
 

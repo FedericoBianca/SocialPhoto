@@ -78,7 +78,7 @@ public class Utilities {
     }
 
     public static String[] getMonth(){
-        String[] data = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12"};
+        String[] data = new String[]{"Select Month","01","02","03","04","05","06","07","08","09","10","11","12"};
         return data;
     }
 

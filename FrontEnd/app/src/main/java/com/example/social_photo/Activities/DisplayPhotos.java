@@ -104,4 +104,5 @@ public class DisplayPhotos extends AppCompatActivity {
             swipeRefresh.setRefreshing(false);
         }
     }
+
 }
