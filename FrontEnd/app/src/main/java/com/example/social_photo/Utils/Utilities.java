@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
@@ -77,13 +78,9 @@ public class Utilities {
     }
 
     public static String[] getMonth(){
-        String[] data = new String[]{"January","February","March","April","May","June","July","August","September","October","November","December"};
+        String[] data = new String[]{"01","02","03","04","05","06","07","08","09","10","11","12"};
         return data;
     }
-
-
-
-
 
 }
 

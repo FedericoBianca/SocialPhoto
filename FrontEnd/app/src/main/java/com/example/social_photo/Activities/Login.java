@@ -7,8 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.TextView;
 
+import com.example.social_photo.NetworkTools.NetworkUtilities;
 import com.example.social_photo.R;
 import com.example.social_photo.Utils.SaveSharedPreference;
 import com.example.social_photo.Utils.Utilities;
@@ -28,6 +30,9 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import com.example.social_photo.NetworkTools.FacebookOperation;
+
+import static com.example.social_photo.NetworkTools.NetworkUtilities.sendToken;
+
 public class Login extends AppCompatActivity {
 
     private LoginButton loginButton;
@@ -56,7 +61,8 @@ public class Login extends AppCompatActivity {
                 id = loginResult.getAccessToken().getUserId();
                 SaveSharedPreference.setUserID(Login.this,AccessToken.getCurrentAccessToken().getUserId());
                 SaveSharedPreference.setUserToken(Login.this, AccessToken.getCurrentAccessToken().getToken());
-                //sendToken(AccessToken.getCurrentAccessToken().getToken());
+                String pippo = sendToken(AccessToken.getCurrentAccessToken().getToken(),SaveSharedPreference.getUserID(Login.this));
+                Log.d("TAG", "PIPPO: " + pippo);
 
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
 

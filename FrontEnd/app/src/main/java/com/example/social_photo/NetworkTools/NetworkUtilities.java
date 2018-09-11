@@ -15,21 +15,36 @@ import java.util.Map;
 public class NetworkUtilities {
     private static final String LOG_TAG = NetworkUtilities.class.getSimpleName();
     private static final String FACEBOOK_TOKEN = "facebook_token";
+    private static final String FACEBOOK_ID = "facebook_id";
+    private static final String NODEJS_ADDRESS = "http://192.168.1.100:3000";
 
-    public static String sendToken(String facebookToken) {
+    public static String sendToken(String facebookToken, String facebookId) {
         //Build up your query URI
-        Uri builtURI = Uri.parse("http://192.168.1.219:3000/users").buildUpon()
+        Uri builtURI = Uri.parse(NODEJS_ADDRESS + "/users").buildUpon()
                 .appendQueryParameter(FACEBOOK_TOKEN, facebookToken)
+                .appendQueryParameter(FACEBOOK_ID, facebookId)
                 .build();
 
         return sendRequest(builtURI, "POST");
     }
-    public static String getDataUser(String facebookToken){
-        Uri builtURI = Uri.parse("http://192.168.1.219:3000/users/myUser").buildUpon()
+    public static String getDataUser(String facebookToken, String facebookId, String yy, String mm){
+        Uri builtURI = Uri.parse(NODEJS_ADDRESS + "/users/myUser").buildUpon()
                 .appendQueryParameter(FACEBOOK_TOKEN, facebookToken)
+                .appendQueryParameter(FACEBOOK_ID, facebookId)
+                .appendQueryParameter("year", yy)
+                .appendQueryParameter("month", mm)
                 .build();
 
-        return sendRequest(builtURI, "POST");
+        return sendRequest(builtURI, "GET");
+    }
+
+    public static void sendLogoutToNodejs(String facebookToken, String facebookId){
+        Uri builtURI = Uri.parse(NODEJS_ADDRESS + "/users/logOut").buildUpon()
+                .appendQueryParameter(FACEBOOK_TOKEN, facebookToken)
+                .appendQueryParameter(FACEBOOK_ID, facebookId)
+                .build();
+
+        sendRequest(builtURI, "POST");
     }
 
     private static String sendRequest(Uri builtURI, String method) {

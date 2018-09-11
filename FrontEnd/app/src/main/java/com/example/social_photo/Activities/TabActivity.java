@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.social_photo.Fragments.OverviewTab;
+import com.example.social_photo.NetworkTools.NetworkUtilities;
 import com.example.social_photo.R;
 import com.example.social_photo.Utils.SaveSharedPreference;
 import com.example.social_photo.Fragments.SearchTab;
@@ -59,6 +60,8 @@ public class TabActivity extends AppCompatActivity {
 
                     editor.clear();
                     editor.apply();
+
+                    NetworkUtilities.sendLogoutToNodejs(oldAccessToken.getToken(),SaveSharedPreference.getUserID(TabActivity.this));
 
                     Intent intent1 = new Intent(TabActivity.this, Login.class);
                     intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
