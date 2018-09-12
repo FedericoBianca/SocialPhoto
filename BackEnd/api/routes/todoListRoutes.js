@@ -8,7 +8,6 @@ module.exports = function(app) {
 
   app.route('/users/myUser')
     .get(todoList.read_a_user)
-    .put(todoList.update_a_user);
 
   app.route('/users/logOut')
     .post(todoList.setLoggedOut);
