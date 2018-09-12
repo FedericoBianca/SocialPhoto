@@ -57,7 +57,7 @@ public class DisplayPhotos extends AppCompatActivity {
                 imageGrid = findViewById(R.id.gridview);
                 progressBar = findViewById(R.id.progressBar2);
                 textView = findViewById(R.id.textView2);
-                textView.setText("Fetching Photos...");
+                textView.setText(R.string.FetchPhotos);
                 progressBar.setIndeterminate(true);
                 progressBar.setVisibility(View.VISIBLE);
                 textView.setVisibility(View.VISIBLE);

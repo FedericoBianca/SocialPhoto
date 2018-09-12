@@ -18,6 +18,10 @@ import com.example.social_photo.NetworkTools.NetworkUtilities;
 import com.example.social_photo.R;
 import com.example.social_photo.Utils.SaveSharedPreference;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 
 public class Recap extends AppCompatActivity {
     protected ListView listView;
@@ -54,7 +58,7 @@ public class Recap extends AppCompatActivity {
                 month = intent.getStringExtra(OverviewTab.MONTH);
                 progressBar = findViewById(R.id.progressBarInfo);
                 textView = findViewById(R.id.textViewInfo);
-                textView.setText("Fetching Infos...");
+                textView.setText(R.string.FetchInfos);
                 progressBar.setIndeterminate(true);
                 progressBar.setVisibility(View.VISIBLE);
                 textView.setVisibility(View.VISIBLE);
@@ -93,10 +97,14 @@ public class Recap extends AppCompatActivity {
                         "Best Location"
 
                 };
+                ArrayList<String> images = new ArrayList<>();
                 listView = findViewById(R.id.listView);
                 listView.setAdapter(new ArrayAdapter<>(
                         Recap.this, R.layout.mylist,
                         R.id.textView3, itemname));
+                listView.setAdapter(new ArrayAdapter<>(Recap.this,R.layout.mylist,R.id.imageInfo,itemname));
+                /*ImageAdapter adapter = new ImageAdapter(Recap.this, images);
+                listView.setAdapter(adapter);*/
             }
             swipeRefresh.setRefreshing(false);
             /*

@@ -21,6 +21,11 @@ public class ImageAdapter extends BaseAdapter {
         FacebookOperation.getFacebookPhoto(album,bitmapList,location,date);
 
     }
+    public ImageAdapter(Context context, ArrayList<String> list){
+        this.context = context;
+        bitmapList.clear();
+        bitmapList.addAll(list);
+    }
 
 
     public int getCount() {

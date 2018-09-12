@@ -20,7 +20,11 @@
     <string name="overview">Overview</string>
     <string name="FetchPhoto">Fetching Photos...</string>
     <string name="submit">Submit</string>
-
+    <string name="WelcomeLogin">Welcome to the Login Page!</string>
+    <string name="find_infos_about_your_photos">Find Infos about your Photos!</string>
+    <string name="fullImage">Display Full Image</string>
+    <string name="FetchPhotos">Fetching Photos...</string>
+    <string name="FetchInfos">Fetching Infos...</string>
 
 
 </resources>

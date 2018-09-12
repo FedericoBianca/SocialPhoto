@@ -121,17 +121,11 @@ public class SearchTab extends Fragment implements View.OnClickListener {
         super.onResume();
         textView.setText(SaveSharedPreference.getUserName(getContext()));
         circleImageView.setImageBitmap(Utilities.StringToBitMap(SaveSharedPreference.getProfilePicture(getContext())));
-        autocompleteFragment.setHint("Search Place...");
 
 
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        plc="";
-        autocompleteFragment.setHint("Search Place...");
-    }
+
 
     //----------------------------------------------------------------------------------------------
 
@@ -166,7 +160,10 @@ public class SearchTab extends Fragment implements View.OnClickListener {
                 intent.putExtra(LOCATION, plc);
                 intent.putExtra(DATE, spinner2.getSelectedItem().toString());
 
+
                 startActivity(intent);
+                autocompleteFragment.setText("");
+                plc="";
 
             }
         }

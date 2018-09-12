@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
         loginButton = findViewById(R.id.login_button);
         loginButton.setReadPermissions(Arrays.asList("public_profile", "email", "user_photos", "user_birthday","user_friends","read_insights","user_likes"));
         textView = findViewById(R.id.login_textView);
-        textView.setText("Welcome to the Login Page!");
+        textView.setText(R.string.WelcomeLogin);
 
         callbackManager = CallbackManager.Factory.create();
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
