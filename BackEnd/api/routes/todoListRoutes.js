@@ -6,9 +6,12 @@ module.exports = function(app) {
   app.route('/users')
     .post(todoList.create_a_user);
 
-  app.route('/users/myUser')
-    .get(todoList.read_a_user)
+  app.route('/users/myUserTrigger')
+    .get(todoList.read_a_user);
 
   app.route('/users/logOut')
     .post(todoList.setLoggedOut);
+
+  app.route('/users/myUser')
+    .get(todoList.respond);
 };

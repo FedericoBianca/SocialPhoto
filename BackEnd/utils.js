@@ -19,15 +19,6 @@ var HttpResponse = "";
 
 function finitoFunction(fb_id){
 
-  arrayComments = [];
-  arrayLikes = [];
-  arrayID = [];
-  mapLikes.clear();
-  mapComments.clear();
-  finito = 0;
-  maxSoFarLikes = 0;
-  maxSoFarComments = 0;
-
   console.log("Handler di finito: scrivo nel db");
   MongoClient.connect(MongoUrl, { useNewUrlParser: true }, function(err, db) {
     if (err) throw err;
@@ -76,7 +67,6 @@ function calculateLikes(id, token, fb, fb_id){
             if(err) throw err;
             finito++;
             if(finito == 2){
-              HttpResponse = finitoFunction(fb_id);
             }
           });
 
@@ -117,7 +107,6 @@ function calculateComments(id, token, fb, fb_id){
             if(err) throw err;
             finito++;
             if(finito == 2){
-              HttpResponse = finitoFunction(fb_id);
             }
           });
         });
@@ -129,6 +118,17 @@ function calculateComments(id, token, fb, fb_id){
 
 
 function calculateUserInfos(token, fb_id, year, month){
+  console.log("YEAR: " + year + " MONTH: " + month);
+  arrayComments = [];
+  arrayLikes = [];
+  arrayID = [];
+  mapLikes.clear();
+  mapComments.clear();
+  finito = 0;
+  maxSoFarLikes = 0;
+  maxSoFarComments = 0;
+  //HttpResponse = "";
+
   var urlPhotos = "me/photos?type=uploaded&limit=500000";
   const FB = require('fb');
   FB.setAccessToken(token);
@@ -146,7 +146,6 @@ function calculateUserInfos(token, fb_id, year, month){
 
     if(arrayID.length == 0){
       console.log("Nothing to show");
-      HttpResponse = "Nothing to show";
     }
 
     for(i=0; i<arrayID.length; i++){
@@ -154,7 +153,6 @@ function calculateUserInfos(token, fb_id, year, month){
       calculateComments(arrayID[i], token, FB, fb_id);
     }
   });
-  return HttpResponse;
 }
 
 module.exports.calculateUserInfos = calculateUserInfos;
