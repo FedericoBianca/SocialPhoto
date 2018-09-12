@@ -68,17 +68,21 @@ public class Recap extends AppCompatActivity {
 
         @Override
         protected String doInBackground(Void... voids) {
+            NetworkUtilities.getDataUser(SaveSharedPreference.getUserToken(Recap.this), SaveSharedPreference.getUserID(Recap.this), year, month);
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String trigger = NetworkUtilities.Trigger(SaveSharedPreference.getUserID(Recap.this));
+            if(trigger == null) {
+                   return "";
+            }
+            else {
 
-
-           String result = NetworkUtilities.getDataUser(SaveSharedPreference.getUserToken(Recap.this), SaveSharedPreference.getUserID(Recap.this), year, month);
-           if(result == null) {
-               return "";
-           }
-           else {
-
-               Log.d("TAG", "LA FESSA DI PIERINO: " + result);
-               return result;
-           }
+               Log.d("TAG",   trigger);
+                   return trigger;
+            }
         }
 
 

@@ -28,11 +28,19 @@ public class NetworkUtilities {
         return sendRequest(builtURI, "POST");
     }
     public static String getDataUser(String facebookToken, String facebookId, String yy, String mm){
-        Uri builtURI = Uri.parse(NODEJS_ADDRESS + "/users/myUser").buildUpon()
+        Uri builtURI = Uri.parse(NODEJS_ADDRESS + "/users/myUserTrigger").buildUpon()
                 .appendQueryParameter(FACEBOOK_TOKEN, facebookToken)
                 .appendQueryParameter(FACEBOOK_ID, facebookId)
                 .appendQueryParameter("year", yy)
                 .appendQueryParameter("month", mm)
+                .build();
+
+        return sendRequest(builtURI, "GET");
+    }
+
+    public static String Trigger( String facebookId){
+        Uri builtURI = Uri.parse(NODEJS_ADDRESS + "/users/myUser").buildUpon()
+                .appendQueryParameter(FACEBOOK_ID, facebookId)
                 .build();
 
         return sendRequest(builtURI, "GET");
