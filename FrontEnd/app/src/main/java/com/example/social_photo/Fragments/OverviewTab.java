@@ -1,8 +1,9 @@
 package com.example.social_photo.Fragments;
 
-import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -11,25 +12,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.social_photo.Activities.DisplayPhotos;
 import com.example.social_photo.Activities.Recap;
-import com.example.social_photo.NetworkTools.NetworkUtilities;
 import com.example.social_photo.R;
-import com.example.social_photo.Utils.SaveSharedPreference;
 import com.example.social_photo.Utils.Utilities;
-import com.james602152002.floatinglabelspinner.FloatingLabelSpinner;
-
-import static com.example.social_photo.R.layout.mylist;
 
 public class OverviewTab extends Fragment implements View.OnClickListener {
-    private ListView listView;
+
     private Spinner dropDown;
     private Spinner dropDown2;
     private Button button;
+    public static final String YEAR = "com.example.social_photo.YEAR";
+    public static final String MONTH = "com.example.social_photo.MONTH";
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.overview_tab, container, false);
@@ -58,47 +54,35 @@ public class OverviewTab extends Fragment implements View.OnClickListener {
     }
     @Override
     public void onClick(View v) {
-        String year = dropDown.getSelectedItem().toString();
-        String month = dropDown2.getSelectedItem().toString();
-        Log.d("TAG", "Data richiesta: " + year + "-" + month);
-        new getInfos().execute(year, month);
+        if(getInternetState()) {
+            String year = dropDown.getSelectedItem().toString();
+            String month = dropDown2.getSelectedItem().toString();
+            if (year.equals("Select Year") || month.equals("Select Month")) {
+                Toast.makeText(getContext(), "You have to select both Year and Month!", Toast.LENGTH_SHORT).show();
+            } else {
+                Log.d("TAG", "Data richiesta: " + year + "-" + month);
+                Intent intent = new Intent(getContext(), Recap.class);
+                intent.putExtra(YEAR, year);
+                intent.putExtra(MONTH, month);
+                startActivity(intent);
+            }
+        }
+        else{
+            Toast.makeText(getContext(), "You have to connect to Internet!", Toast.LENGTH_SHORT).show();
+
+        }
     }
 
-    public class getInfos extends AsyncTask<String,Void,String> {
+    public boolean getInternetState(){
 
-        ProgressDialog progress;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            progress = ProgressDialog.show(getContext(), "Fetching infos", "Fetching infos...", true);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getActivity().getSystemService (Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            return  true;
         }
-
-        @Override
-        protected String doInBackground(String... params) {
-            String year = params[0];
-            String month = params[1];
-            String result = NetworkUtilities.getDataUser(SaveSharedPreference.getUserToken(getContext()), SaveSharedPreference.getUserID(getContext()), year, month);
-            Log.d("TAG", "LA FESSA DI PIERINO: " + result);
-            return result;
-        }
-
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            progress.dismiss();
-            /*
-            String[] resultArray = s.split(",");
-            String photoId = resultArray[0];
-            int photoLikes = Integer.parseInt(resultArray[1]);
-            */
-            Intent intent = new Intent(getContext(),Recap.class);
-            startActivity(intent);
-
-        }
-
+        else
+            return false;
     }
-
 
 }

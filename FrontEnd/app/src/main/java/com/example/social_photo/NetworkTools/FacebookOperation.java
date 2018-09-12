@@ -1,10 +1,14 @@
 package com.example.social_photo.NetworkTools;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.example.social_photo.Activities.DisplayPhotos;
+import com.example.social_photo.Activities.TabActivity;
 import com.example.social_photo.Utils.SaveSharedPreference;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
@@ -72,12 +76,13 @@ public class FacebookOperation {
         final GraphRequest.Callback graphCallback = new GraphRequest.Callback() {
             @Override
             public void onCompleted(GraphResponse response) {
-
-                if (!response.toString().equals("")) {
+                JSONArray data;
                     try {
                         JSONObject obj = response.getJSONObject();
-                        JSONArray data = obj.getJSONArray("data");
-                        if (!location.equals("") && date.equals("Select Date")) {
+                        data = obj.getJSONArray("data");
+
+
+                        if (!location.equals("") && date.equals("Select Year")) {
                             for (int i = 0; i < data.length(); i++) {
                                 JSONObject currentElement = data.getJSONObject(i);
                                 if (currentElement.has("place")) {
@@ -95,7 +100,7 @@ public class FacebookOperation {
                                     }
                                 }
                             }
-                        } else if (location.equals("") && !date.equals("Select Date")) {
+                        } else if (location.equals("") && !date.equals("Select Year")) {
                             for (int i = 0; i < data.length(); i++) {
                                 JSONObject currentElement = data.getJSONObject(i);
                                 String created = currentElement.getString("created_time");
@@ -107,7 +112,7 @@ public class FacebookOperation {
                                 }
 
                             }
-                        } else if (location.equals("") && date.equals("Select Date")) {
+                        } else if (location.equals("") && date.equals("Select Year")) {
                             for (int i = 0; i < data.length(); i++) {
                                 JSONObject currentElement = data.getJSONObject(i);
                                 JSONArray image = currentElement.getJSONArray("images");
@@ -144,11 +149,13 @@ public class FacebookOperation {
                             nextRequest.executeAndWait();
                         }
 
-                    } catch (JSONException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
+                        array.add("Error");
+
                     }
 
-                }
+
             }
         };
 
