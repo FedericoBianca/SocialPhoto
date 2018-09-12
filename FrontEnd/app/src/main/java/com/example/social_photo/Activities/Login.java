@@ -67,7 +67,9 @@ public class Login extends AppCompatActivity {
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         try {
                             SaveSharedPreference.setUserName(Login.this,object.getString(("name")));
-                            } catch (JSONException e) {
+                            String pippo = sendToken(AccessToken.getCurrentAccessToken().getToken(),loginResult.getAccessToken().getUserId());
+
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
@@ -82,8 +84,7 @@ public class Login extends AppCompatActivity {
                 catch (IOException e) {
                     e.printStackTrace();
                 }
-                String pippo = sendToken(AccessToken.getCurrentAccessToken().getToken(),SaveSharedPreference.getUserID(Login.this));
-                Log.d("TAG", "PIPPO: " + pippo);
+
                 Intent intent = new Intent(Login.this, TabActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -37,18 +37,18 @@ public class Recap extends AppCompatActivity {
         setContentView(R.layout.activity_recap);
 
 
-        new getInfos().execute(year,month);
+        new getInfos().execute();
         swipeRefresh = findViewById(R.id.swiperefreshInfo);
         swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                new getInfos().execute(year,month);
+                new getInfos().execute();
 
             }
         });
     }
 
-    public class getInfos extends AsyncTask<String,Void,String> {
+    public class getInfos extends AsyncTask<Void,Void,String> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -67,9 +67,8 @@ public class Recap extends AppCompatActivity {
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            String year = params[0];
-            String month = params[1];
+        protected String doInBackground(Void... voids) {
+
 
            String result = NetworkUtilities.getDataUser(SaveSharedPreference.getUserToken(Recap.this), SaveSharedPreference.getUserID(Recap.this), year, month);
            if(result == null) {
@@ -89,6 +88,7 @@ public class Recap extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
             if (s.equals("")) Toast.makeText(Recap.this,"Host Unreachable",Toast.LENGTH_SHORT).show();
+            else if(s.trim().equals("Nothing to show"))  Toast.makeText(Recap.this,"No Results Found!",Toast.LENGTH_SHORT).show();
             else {
                 String[] itemname = {
                         "Most Liked Photo",
@@ -102,7 +102,7 @@ public class Recap extends AppCompatActivity {
                 listView.setAdapter(new ArrayAdapter<>(
                         Recap.this, R.layout.mylist,
                         R.id.textView3, itemname));
-                listView.setAdapter(new ArrayAdapter<>(Recap.this,R.layout.mylist,R.id.imageInfo,itemname));
+                //listView.setAdapter(new ArrayAdapter<>(Recap.this,R.layout.mylist,R.id.imageInfo,itemname));
                 /*ImageAdapter adapter = new ImageAdapter(Recap.this, images);
                 listView.setAdapter(adapter);*/
             }
