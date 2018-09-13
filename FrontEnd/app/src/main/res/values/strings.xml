@@ -25,6 +25,7 @@
     <string name="fullImage">Display Full Image</string>
     <string name="FetchPhotos">Fetching Photos...</string>
     <string name="FetchInfos">Fetching Infos...</string>
+    <string name="LikeAndComments">LikeAndComments</string>
 
 
 </resources>

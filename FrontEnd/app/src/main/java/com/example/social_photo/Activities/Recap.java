@@ -1,6 +1,7 @@
 package com.example.social_photo.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.example.social_photo.Fragments.OverviewTab;
 import com.example.social_photo.NetworkTools.NetworkUtilities;
 import com.example.social_photo.R;
 import com.example.social_photo.Utils.SaveSharedPreference;
+import com.example.social_photo.Utils.Utilities;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -87,39 +89,26 @@ public class Recap extends AppCompatActivity {
 
 
         @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
             progressBar.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
-            if (s.equals("")) Toast.makeText(Recap.this,"Host Unreachable",Toast.LENGTH_SHORT).show();
-            else if(s.trim().equals("Nothing to show"))  Toast.makeText(Recap.this,"No Results Found!",Toast.LENGTH_SHORT).show();
+            if (result.equals("")) Toast.makeText(Recap.this,"Host Unreachable",Toast.LENGTH_SHORT).show();
+            else if(result.trim().equals("Nothing to show"))  Toast.makeText(Recap.this,"No Results Found!",Toast.LENGTH_SHORT).show();
             else {
-                String[] itemname = {
-                        "Most Liked Photo",
-                        "Most Commented Photo",
-                        "Best Friend",
-                        "Best Location"
-
+                String[] ris = result.split(",");
+                String[] item = {
+                        "Most Liked Photo: " + ris[1] +" likes!",
+                        "Most Commented Photo: " + ris[3] +"comments!"
                 };
-                ArrayList<String> images = new ArrayList<>();
+                String[] images = {ris[0], ris[2]};
                 listView = findViewById(R.id.listView);
-                listView.setAdapter(new ArrayAdapter<>(
-                        Recap.this, R.layout.mylist,
-                        R.id.textView3, itemname));
-                //listView.setAdapter(new ArrayAdapter<>(Recap.this,R.layout.mylist,R.id.imageInfo,itemname));
-                /*ImageAdapter adapter = new ImageAdapter(Recap.this, images);
-                listView.setAdapter(adapter);*/
+                ListAdapter adapter = new ListAdapter(Recap.this,item,images);
+                listView.setAdapter(adapter);
+
             }
             swipeRefresh.setRefreshing(false);
-            /*
-            String[] resultArray = s.split(",");
-            String photoId = resultArray[0];
-            int photoLikes = Integer.parseInt(resultArray[1]);
-            */
-            /*Intent intent = new Intent(getContext(),Recap.class);
-            startActivity(intent);*/
-
-        }
+            }
 
     }
 }
