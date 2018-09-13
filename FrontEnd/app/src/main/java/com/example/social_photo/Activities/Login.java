@@ -2,15 +2,13 @@ package com.example.social_photo.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-import android.util.Log;
 import android.widget.TextView;
 
-import com.example.social_photo.NetworkTools.NetworkUtilities;
+import com.example.social_photo.NetworkTools.FacebookOperation;
 import com.example.social_photo.R;
 import com.example.social_photo.Utils.SaveSharedPreference;
 import com.example.social_photo.Utils.Utilities;
@@ -28,8 +26,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.Arrays;
-
-import com.example.social_photo.NetworkTools.FacebookOperation;
 
 import static com.example.social_photo.NetworkTools.NetworkUtilities.sendToken;
 

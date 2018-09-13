@@ -1,14 +1,11 @@
 package com.example.social_photo.Activities;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,11 +15,6 @@ import com.example.social_photo.Fragments.OverviewTab;
 import com.example.social_photo.NetworkTools.NetworkUtilities;
 import com.example.social_photo.R;
 import com.example.social_photo.Utils.SaveSharedPreference;
-import com.example.social_photo.Utils.Utilities;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class Recap extends AppCompatActivity {

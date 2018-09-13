@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.social_photo.Activities.DisplayPhotos;
+import com.example.social_photo.NetworkTools.FacebookOperation;
 import com.example.social_photo.R;
 import com.example.social_photo.Utils.SaveSharedPreference;
 import com.example.social_photo.Utils.Utilities;
@@ -29,7 +30,6 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import com.example.social_photo.NetworkTools.FacebookOperation;
 
 public class SearchTab extends Fragment implements View.OnClickListener {
     private TextView textView;
@@ -84,6 +84,11 @@ public class SearchTab extends Fragment implements View.OnClickListener {
                 double lng = place.getLatLng().longitude;
                 try {
                     plc = Utilities.getCity(lat,lng,getContext());
+                    try {
+
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

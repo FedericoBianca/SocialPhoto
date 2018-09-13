@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.AsyncTask;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
@@ -61,15 +60,26 @@ public class Utilities {
     //--------------------------------------------------------------------------------
 
     public static String getCity(double lat,double lng, Context ctx) throws IOException{
-
+        String selected = "";
         if(Geocoder.isPresent()){
             List<Address> ris;
             Geocoder geocoder = new Geocoder(ctx, Locale.ENGLISH);
             ris = geocoder.getFromLocation(lat,lng,5);
-            if(ris.size()>0)
-                return ris.get(ris.size()-1).getLocality();
+            for(int i = 0; i < ris.size(); i++){
+                if(ris.get(i).getLocality() != null ){
+
+                    selected = ris.get(i).getLocality();
+
+                    }
+
+                else{
+
+                    return selected;
+
+                    }
+                }
             }
-        return "";
+        return selected;
     }
 
     public static String[] getYears(){

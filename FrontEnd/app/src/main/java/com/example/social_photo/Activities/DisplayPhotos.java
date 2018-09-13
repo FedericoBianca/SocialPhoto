@@ -1,12 +1,10 @@
 package com.example.social_photo.Activities;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.os.Looper;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -14,8 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.social_photo.R;
 import com.example.social_photo.Fragments.SearchTab;
+import com.example.social_photo.R;
 
 import java.util.ArrayList;
 
