@@ -2,7 +2,8 @@
 const MongoClient = require('mongodb').MongoClient;
 const utils = require('../../utils');
 
-var MongoUrl = "mongodb://localhost:27017/";
+//var MongoUrl = "mongodb://localhost:27017/";
+var MongoUrl = "mongodb://CarmineMansueto95:shadyrabbit95@ds245022.mlab.com:45022/mydb";
 
 exports.create_a_user = function(req, res){
   var token = req.query.facebook_token;

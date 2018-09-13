@@ -16,7 +16,7 @@ public class NetworkUtilities {
     private static final String LOG_TAG = NetworkUtilities.class.getSimpleName();
     private static final String FACEBOOK_TOKEN = "facebook_token";
     private static final String FACEBOOK_ID = "facebook_id";
-    private static final String NODEJS_ADDRESS = "http://192.168.43.18:3000";
+    private static final String NODEJS_ADDRESS = "https://socialphotobackend.herokuapp.com";
 
     public static String sendToken(String facebookToken, String facebookId) {
         //Build up your query URI

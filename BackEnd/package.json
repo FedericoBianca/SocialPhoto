@@ -1,6 +1,6 @@
 {
   "name": "android-nodejs",
-  "version": "1.0.0",
+  "version": "10.10.0",
   "description": "",
   "main": "server.js",
   "scripts": {
@@ -10,6 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
-    "fb": "^2.0.0"
+    "fb": "^2.0.0",
+    "mongodb": "^3.1.4" ,
+    "hashmap": "^2.3.0"
+  },
+  "scripts":{
+    "start": "node server.js"
   }
 }

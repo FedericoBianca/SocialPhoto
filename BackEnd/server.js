@@ -12,7 +12,8 @@ app.listen(port);
 
 console.log('RESTful API server started on: ' + port);
 
-var MongoUrl = "mongodb://localhost:27017/";
+//var MongoUrl = "mongodb://localhost:27017/";
+var MongoUrl = "mongodb://CarmineMansueto95:shadyrabbit95@ds245022.mlab.com:45022/mydb";
 
 //Creo la collection degli utenti
 MongoClient.connect(MongoUrl, { useNewUrlParser: true }, function(err, db) {

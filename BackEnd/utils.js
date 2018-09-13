@@ -5,7 +5,8 @@
   const FB = require('fb');
 //_________________________________________________
 
-var MongoUrl = "mongodb://localhost:27017/";
+//var MongoUrl = "mongodb://localhost:27017/";
+var MongoUrl = "mongodb://CarmineMansueto95:shadyrabbit95@ds245022.mlab.com:45022/mydb";
 
 var arrayComments = [];
 var arrayLikes = [];  //cresce ad ogni funzione di callback, se la size eguaglia quella di arrayID sono all'ultima funzione di callback
