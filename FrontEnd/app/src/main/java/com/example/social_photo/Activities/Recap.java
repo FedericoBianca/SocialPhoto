@@ -78,13 +78,12 @@ public class Recap extends AppCompatActivity {
             }
             String trigger = NetworkUtilities.Trigger(SaveSharedPreference.getUserID(Recap.this));
             if(trigger == null) {
-                   return "";
+                   return "Error";
             }
             else {
-
-               Log.d("TAG",   trigger);
-                   return trigger;
+                return trigger;
             }
+
         }
 
 
@@ -93,19 +92,30 @@ public class Recap extends AppCompatActivity {
             super.onPostExecute(result);
             progressBar.setVisibility(View.GONE);
             textView.setVisibility(View.GONE);
-            if (result.equals("")) Toast.makeText(Recap.this,"Host Unreachable",Toast.LENGTH_SHORT).show();
-            else if(result.trim().equals("Nothing to show"))  Toast.makeText(Recap.this,"No Results Found!",Toast.LENGTH_SHORT).show();
+            if (result.equals("Error"))
+                    Toast.makeText(Recap.this, "Host Unreachable", Toast.LENGTH_SHORT).show();
             else {
-                String[] ris = result.split(",");
-                String[] item = {
-                        "Most Liked Photo: " + ris[1] +" likes!",
-                        "Most Commented Photo: " + ris[3] +"comments!"
-                };
-                String[] images = {ris[0], ris[2]};
-                listView = findViewById(R.id.listView);
-                ListAdapter adapter = new ListAdapter(Recap.this,item,images);
-                listView.setAdapter(adapter);
+                try {
+                    String[] ris = result.split(",");
 
+                    if (ris[0].equals(""))
+                        Toast.makeText(Recap.this, "No Results Found!", Toast.LENGTH_SHORT).show();
+
+                    else {
+                        String[] item = {
+                                "Most Liked Photo: " + ris[1] + " likes!",
+                                "Most Commented Photo: " + ris[3] + "comments!"
+                        };
+                        String[] images = {ris[0], ris[2]};
+                        listView = findViewById(R.id.listView);
+                        ListAdapter adapter = new ListAdapter(Recap.this, item, images);
+                        listView.setAdapter(adapter);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(Recap.this, "An Error has Occurred", Toast.LENGTH_LONG).show();
+                }
             }
             swipeRefresh.setRefreshing(false);
             }
