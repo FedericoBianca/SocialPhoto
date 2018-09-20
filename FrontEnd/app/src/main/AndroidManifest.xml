@@ -63,6 +63,8 @@
         <activity
             android:name=".Activities.Recap"
             android:parentActivityName=".Activities.TabActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+
             tools:targetApi="jelly_bean" />
     </application>
 
